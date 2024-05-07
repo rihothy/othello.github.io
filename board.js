@@ -138,20 +138,24 @@ class Board {
             for (let j = 0; j < 8; ++j) {
                 let type = this.getType(i, j);
 
-                if (type == cur_type) {
-                    ++cnt;
-                    val += weight[i][j];
+                if (type != 'empty') {
+                    if (type == cur_type) {
+                        ++cnt;
+                        val += weight[i][j];
+                    } else {
+                        ++cnt;
+                        val -= weight[i][j];
+                    }
                 }
             }
         }
 
         val /= cnt;
-        val *= (white + black) / 4;
 
         if (cur_type == 'white') {
-            val += white - black;
+            val += (white - black) / (white + black);
         } else {
-            val += black - white;
+            val += (black - white) / (white + black);
         }
 
         return val;
@@ -215,7 +219,7 @@ async function miniMax(board, ai_type) {
                                 alpha = Math.max(alpha, tval);
                             }
                         }
-    
+
                         if (depth % 2 == 1 && tval < val) {
                             val = tval, i = ti, j = tj;
                         } else if (depth % 2 == 0 && tval > val) {
