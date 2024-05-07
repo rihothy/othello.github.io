@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Othello</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="board.js"></script>
+        <script src="index.js"></script>
+        <link href="bootstrap.min.css" rel="stylesheet">
+
+        <style>
+            @keyframes appear {
+                0% {
+                    transform: translate(-50%, -50%) scale(0);
+                }
+                75% {
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(1);
+                }
+            }
+
+            @keyframes disappear {
+                0% {
+                    transform: translate(-50%, -50%) scale(1);
+                }
+                25% {
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(0);
+                }
+            }
+
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                overflow: hidden;
+            }
+
+            table {
+                margin: 0 auto;
+                margin-top: min(10vw, 10vh);
+                border-collapse: collapse;
+                /* background-color: rgba(156, 169,134, 0.85); */
+            }
+
+            table, tr, td {
+                border: 0.1rem solid rgba(127, 127, 127, 0.5);
+            }
+
+            .cell {
+                width: min(10vw, 10vh);
+                height: min(10vw, 10vh);
+            }
+
+            .white-chess {
+                top: 50%;
+                left: 50%;
+                width: 70%;
+                height: 70%;
+                position: relative;
+
+                border-radius: 50%;
+                background-color: white;
+                box-shadow: 0.05rem 0.05rem 0.2rem 0.1rem rgba(127, 127, 127, 0.75);
+                transform: translate(-50%, -50%);
+            }
+
+            .black-chess {
+                top: 50%;
+                left: 50%;
+                width: 76%;
+                height: 76%;
+                position: relative;
+
+                border-radius: 50%;
+                background-color: rgba(0, 0, 0, 0.85);
+                box-shadow: 0.05rem 0.05rem 0.2rem 0.1rem rgba(127, 127, 127, 0.75);
+                transform: translate(-50%, -50%);
+            }
+
+            .container {
+                filter: blur(4px);
+            }
+
+            .mask {
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+                background-color: rgba(127, 127, 127, 0.25);
+            }
+
+            .play-game-btn  {
+                top: 40vh;
+                position: relative;
+                text-align: center;
+            }
+
+            .first-turn-check {
+                top: 45vh;
+                left: 50vw;
+                width: fit-content;
+                position: relative;
+                transform: translatex(-50%);
+            }
+
+            .score-container {
+                margin-top: 5rem;
+                text-align: center;
+            }
+
+            span {
+                font-weight: bold;
+                text-shadow: 0.05rem 0.05rem 0.1rem rgba(127, 127, 127, 0.5);
+            }
+
+            .mask-end {
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+                display: none;
+            }
+
+            .mask-end >div {
+                top: 40vh;
+                position: relative;
+                text-align: center;
+            }
+
+            .mask-end >div >span {
+                font-size: 2rem;
+            }
+
+            .end-text {
+                color: rgba(211, 211, 211, 0.75);
+                text-shadow: 0.1rem 0.1rem 0.2rem rgba(127, 127, 127, 0.85);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div></div>
+
+            <div class="score-container">
+                <div>
+                    <span>White:&nbsp;&nbsp;</span>
+                    <span id="white-score">2</span>
+                </div>
+
+                <div>
+                    <span>Black:&nbsp;&nbsp;</span>
+                    <span id="black-score">2</span>
+                </div>
+
+                <div>
+                    <span>&nbsp;</span>
+                </div>
+
+                <div>
+                    <span id="role-text">Player Turn(White)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mask">
+            <div class="play-game-btn">
+                <button type="button" class="btn btn-outline-info" id="play-game-btn">Play Game</button>
+            </div>
+
+            <div class="first-turn-check">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="AI-first-check">
+                    <label class="form-check-label" for="AI-first-check">
+                        AI First
+                    </label>
+                  </div>
+            </div>
+        </div>
+
+        <div class="mask-end">
+            <div>
+                <span id="end-text" class="end-text">Draw!</span>
+            </div>
+        </div>
+    </body>
+</html>
