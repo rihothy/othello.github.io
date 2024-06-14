@@ -1,6 +1,7 @@
 let cur_type = 'white';
 let cur_role = 'player';
 let board = undefined;
+let gameOver = false;
 let playing = false;
 let chesses = [];
 
@@ -21,6 +22,8 @@ function checkResult() {
         } else {
             document.getElementById('end-text').innerHTML = 'AI Win!';
         }
+
+        gameOver = true;
 
         return true;
     }
@@ -86,7 +89,23 @@ async function AIPlay() {
 }
 
 window.addEventListener('load', (ev) => {
+    let name = window.localStorage.getItem('name');
     let table = document.createElement('table');
+
+    if (name === null) {
+        do {
+            name = prompt('请输入你的昵称（后续不可修改）');
+
+            if (name.length > 10 || name.indexOf(',') != -1) {
+                name = null;
+                alert('昵称不符号要求！');
+            }
+        } while (!name);
+
+        window.localStorage.setItem('name', name);
+    }
+
+    document.title = `Othello-${name}`;
 
     for (let i = 0; i < 8; ++i) {
         let tr = document.createElement('tr');
@@ -128,6 +147,12 @@ window.addEventListener('load', (ev) => {
             AIPlay();
         } else {
             playing = true;
+        }
+    });
+
+    document.body.addEventListener('click', (ev) => {
+        if (gameOver) {
+            location.reload();
         }
     });
 });

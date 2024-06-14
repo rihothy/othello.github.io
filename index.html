@@ -38,6 +38,7 @@
             html, body {
                 margin: 0;
                 padding: 0;
+                user-select: none;
             }
 
             body {
@@ -48,7 +49,6 @@
                 margin: 0 auto;
                 margin-top: min(10vw, 10vh);
                 border-collapse: collapse;
-                /* background-color: rgba(156, 169,134, 0.85); */
             }
 
             table, tr, td {
@@ -56,8 +56,8 @@
             }
 
             .cell {
-                width: min(10vw, 10vh);
-                height: min(10vw, 10vh);
+                width: min(10vw, 7vh);
+                height: min(10vw, 7vh);
             }
 
             .white-chess {
@@ -99,8 +99,19 @@
                 background-color: rgba(127, 127, 127, 0.25);
             }
 
+            button {
+                width: 9rem;
+                box-shadow: 0 0 0.32rem 0.32rem rgba(255, 255, 255, 0.5);
+            }
+
             .play-game-btn  {
-                top: 45vh;
+                top: 42vh;
+                position: relative;
+                text-align: center;
+            }
+
+            .ranking-list-btn  {
+                top: 46vh;
                 position: relative;
                 text-align: center;
             }
@@ -179,6 +190,10 @@
             <div class="play-game-btn">
                 <button type="button" class="btn btn-dark" id="play-game-btn">Play Game</button>
             </div>
+
+            <!-- <div class="ranking-list-btn">
+                <button type="button" class="btn btn-dark" id="ranking-list-btn">Ranking List</button>
+            </div> -->
 
             <div class="first-turn-check">
                 <div class="form-check">
